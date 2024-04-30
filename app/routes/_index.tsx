@@ -5,8 +5,8 @@ import { Form, useActionData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Send Anon Messages to Jake" },
+    { name: "description", content: "You can send messages to Jake so that ONLY he can see them. Because, why not!?" },
   ];
 };
 
