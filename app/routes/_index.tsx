@@ -1,4 +1,7 @@
-import type { MetaFunction } from "@remix-run/node";
+import { redirect, type MetaFunction, ActionFunctionArgs, json } from "@remix-run/node";
+import './styles.css'
+import { db } from "~/db.server";
+import { Form, useActionData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,35 +10,35 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const message = formData.get('message');
+  const username = formData.get('username');
+  if (!message || !username) {
+    return json({ error: "Please fill all required fields" })
+  }
+  await db.exec(`INSERT INTO messages (username, content) VALUES ('${username}', '${message}')`);
+  return redirect('/thank-you');
+};
+
 export default function Index() {
+  const data = useActionData()
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      <Form method="POST" className="bg-gray-800 p-8 rounded-lg shadow-lg w-80">
+        {data?.error && <div className="bg-red-500 p-5 mb-5">{data.error}</div>}
+        <h2 className="text-2xl font-bold mb-4">Send <span className="underline">@jake</span> a note</h2>
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-sm font-medium">Your Name</label>
+          <input type="text" id="username" name="username" className="w-full px-3 py-2 mt-1 text-gray-900 bg-gray-200 rounded-lg" placeholder="Enter your name" />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="message" className="block text-sm font-medium">Message</label>
+          <textarea id="message" name="message" rows={4} className="w-full px-3 py-2 mt-1 text-gray-900 bg-gray-200 rounded-lg" placeholder="Enter your message"></textarea>
+        </div>
+        <button type="submit" className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 rounded-lg">Send Message</button>
+      </Form>
     </div>
   );
 }
