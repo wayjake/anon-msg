@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, json, type MetaFunction } from "@remix-run/node";
 import './styles.css'
 import { db } from "~/db.server";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
     return [
@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
         { name: "description", content: "These are your messages!" },
     ];
 };
-
+// http://localhost:5173/list-messages?token=superSecretPhrase
 export async function loader({ request }: ActionFunctionArgs) {
     const url = new URL(request.url)
     const token = url.searchParams.get('token')
@@ -32,7 +32,7 @@ export default function Index() {
                     Nothing to see here, yet
                 </div>}
 
-                {messages.map(message => <div>@{message.username}: {message.content}</div>)}
+                {messages.map(message => <Link to={`/view-message/${message.id}`} key={message.id}><div >@{message.username}: {message.content}</div></Link>)}
             </div>
         </div>
     );
