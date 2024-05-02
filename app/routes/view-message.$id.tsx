@@ -37,14 +37,14 @@ export async function loader({ params }: ActionFunctionArgs) {
 export default function Index() {
     const { message } = useLoaderData();
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 text-white">
             <div className="bg-gray-800 shadow-lg w-full max-w-md m-0 lg:max-w-sm rounded-lg">
                 {/* Gradient header with dynamic text */}
-                <div className="w-full p-4 leading-none bg-gradient-to-r from-pink-500 to-orange-400 text-white text-lg font-bold uppercase rounded-t-lg">
+                <div className="w-full p-6 leading-none bg-gradient-to-r from-pink-500 to-orange-400 text-white text-lg font-bold uppercase rounded-t-lg">
                     <span></span>@{message.username || "Anon"} says
                 </div>
                 {/* White section with dynamic message content */}
-                <div className="bg-white text-gray-800 w-full p-4 leading-none rounded-b-lg">
+                <div className="bg-white text-gray-800 w-full p-6 leading-none rounded-b-lg">
                     {message.content}
                 </div>
             </div>
