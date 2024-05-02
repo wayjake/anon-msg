@@ -18,7 +18,10 @@ export default function Index() {
         <div className="mb-4">
           Jake looks forward to reviewing these during his break!
         </div>
-        <Link to="/" className="text-underline">Send another message</Link>
+        <Link to="/" className="inline-block px-5 py-2 text-white font-bold w-full bg-gradient-to-r from-pink-500 to-orange-400 rounded-md text-center shadow hover:bg-gradient-to-l focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition duration-150 ease-in-out">
+          Send another message
+        </Link>
+
       </div>
     </div>
   );

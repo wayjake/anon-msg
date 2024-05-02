@@ -37,7 +37,7 @@ export default function Index() {
           <label htmlFor="message" className="block text-sm font-medium">Message</label>
           <textarea id="message" name="message" rows={4} className="w-full px-3 py-2 mt-1 text-gray-900 bg-gray-200 rounded-lg" placeholder="Enter your message"></textarea>
         </div>
-        <button type="submit" className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 rounded-lg">Send Message</button>
+        <button type="submit" className="inline-block px-5 py-2 text-white font-bold w-full bg-gradient-to-r from-pink-500 to-orange-400 rounded-md text-center shadow hover:bg-gradient-to-l focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition duration-150 ease-in-out">Send Message</button>
       </Form>
     </div>
   );
